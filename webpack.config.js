@@ -2,6 +2,7 @@ const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
 const typescript = {
   test: /\.tsx?$/,
@@ -13,7 +14,7 @@ const typescript = {
 };
 
 const babel = {
-  test: /\.(ts|js)x?$/,
+  test: /\.(js|ts)x?$/,
   loader: 'babel-loader',
   exclude: /node_modules/,
 };
@@ -32,6 +33,11 @@ const files = {
   },
 };
 
+const vue = {
+  test: /\.vue$/i,
+  use: 'vue-loader',
+};
+
 const plugins = [
   new htmlWebpackPlugin({
     showErrors: true,
@@ -39,7 +45,11 @@ const plugins = [
     template: path.resolve(__dirname, 'app', 'index.html'),
     favicon: './app/favicon.ico',
   }),
-  new webpack.DefinePlugin({}),
+  new VueLoaderPlugin(),
+  new webpack.DefinePlugin({
+    __VUE_OPTIONS_API__: true,
+    __VUE_PROD_DEVTOOLS__: true,
+  }),
   new miniCssExtractPlugin({
     filename: 'css/app.css',
   }),
@@ -53,7 +63,7 @@ module.exports = {
     path: path.resolve(__dirname, 'app', 'public'),
   },
   module: {
-    rules: [babel, sass, typescript, files],
+    rules: [babel, sass, typescript, files, vue],
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', 'jsx', '.vue', '.scss'],
