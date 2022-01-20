@@ -1,7 +1,7 @@
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-const miniCssExtractPlugin = require('mini-css-extract-plugin');
+// const miniCssExtractPlugin = require('mini-css-extract-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
 const typescript = {
@@ -21,7 +21,12 @@ const babel = {
 
 const sass = {
   test: /\.s[ac]ss$/i,
-  use: [miniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+  use: [
+    // miniCssExtractPlugin.loader,
+    'style-loader',
+    'css-loader',
+    { loader: 'sass-loader', options: { sourceMap: true } },
+  ],
 };
 
 const files = {
@@ -50,9 +55,9 @@ const plugins = [
     __VUE_OPTIONS_API__: true,
     __VUE_PROD_DEVTOOLS__: true,
   }),
-  new miniCssExtractPlugin({
-    filename: 'css/app.css',
-  }),
+  // new miniCssExtractPlugin({
+  //   filename: 'css/app.css',
+  // }),
 ];
 
 module.exports = {

@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,700;1,300;1,400;1,700&display=swap');
+@import 'vars';
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-@import 'vars';
-@import 'appbar';
-@import 'sidebar';
-
 body {
-  background: url('assets/bg.svg');
+  background: url('./assets/bg.svg') fixed;
   font-family: 'Roboto Condensed', sans-serif;
   min-height: 100vh;
   font-size: $font-size;
 }
+
+@import 'appbar';
+@import 'sidebar';
+@import 'main';

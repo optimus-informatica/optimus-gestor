@@ -3,18 +3,25 @@
     <appbar />
     <sidebar />
   </header>
-  <main>
+  <main :class="className">
     <router-view />
   </main>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
+import { useStore } from 'vuex';
 import Appbar from './components/Appbar.vue';
 import Sidebar from './components/Sidebar.vue';
+import { Store } from './types';
 
 export default defineComponent({
   components: { Appbar, Sidebar },
   name: 'App',
+  setup() {
+    const { getters } = useStore<Store>();
+    const className = computed(() => (getters.sidebar ? 'main show' : 'main'));
+    return { className };
+  },
 });
 </script>

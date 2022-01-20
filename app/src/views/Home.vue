@@ -1,5 +1,7 @@
 <template>
-  <h1>Bem vindo ao VUE3</h1>
+  <div class="home">
+    <h1>Bem vindo ao VUE 3</h1>
+  </div>
 </template>
 
 <script lang="ts">
