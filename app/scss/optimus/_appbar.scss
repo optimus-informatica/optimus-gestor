@@ -1,0 +1,39 @@
+.appbar {
+  background: $appbar-primary;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: $appbar-size;
+  color: $appbar-color;
+  margin-left: $appbar-size;
+  transition: margin $time ease-in-out;
+  .title {
+    font-size: calc($font-size + 0.5rem);
+    margin: auto;
+    font-weight: bold;
+  }
+  .user {
+    display: flex;
+    list-style: none;
+    .item {
+      a,
+      button {
+        padding: 0 $padding;
+        border: none;
+        background: none;
+        color: $appbar-color;
+        cursor: pointer;
+        text-decoration: none;
+        .material-icons {
+          font-size: calc($font-size + 1rem);
+        }
+        &:hover {
+          color: $appbar-light;
+        }
+      }
+    }
+  }
+  &.show {
+    margin-left: $sidebar-size;
+  }
+}
