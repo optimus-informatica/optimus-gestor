@@ -60,13 +60,13 @@
 </template>
 
 <script lang="ts">
-import { Store } from '@/types';
+import { State } from '@/types';
 import { computed, defineComponent } from 'vue';
 import { useStore } from 'vuex';
 
 export default defineComponent({
   setup() {
-    const { commit, getters } = useStore<Store>();
+    const { commit, getters } = useStore<State>();
 
     //
     // Methods

@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { Store } from '@/types';
+import { State } from '@/types';
 import { computed, defineComponent } from 'vue';
 import { useStore } from 'vuex';
 
@@ -26,7 +26,7 @@ export default defineComponent({
     //
     // Store
     //
-    const { getters } = useStore<Store>();
+    const { getters } = useStore<State>();
 
     //
     // Computeds

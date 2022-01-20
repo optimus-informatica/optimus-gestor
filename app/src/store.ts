@@ -1,17 +1,9 @@
 import { createStore } from 'vuex';
-import { Store } from '@/types';
-import axios from 'axios';
-import { user } from '@/defaults';
+import { State } from '@/types';
+import { state } from '@/defaults';
 
-axios.defaults.baseURL = 'http://localhost:8000';
-axios.defaults.withCredentials = true;
-
-const store = createStore<Store>({
-  state: () => ({
-    sidebar: false,
-    axios,
-    user: user(),
-  }),
+const store = createStore<State>({
+  state: () => state(),
 
   mutations: {
     toggleSidebar: state => {

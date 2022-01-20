@@ -1,6 +1,6 @@
 import { AxiosStatic } from 'axios';
 
-export interface Store {
+export interface State {
   sidebar: boolean;
   axios: AxiosStatic;
   user: User;

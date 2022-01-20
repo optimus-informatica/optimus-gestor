@@ -13,13 +13,13 @@ import { computed, defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import Appbar from './components/Appbar.vue';
 import Sidebar from './components/Sidebar.vue';
-import { Store } from './types';
+import { State } from './types';
 
 export default defineComponent({
   components: { Appbar, Sidebar },
   name: 'App',
   setup() {
-    const { getters } = useStore<Store>();
+    const { getters } = useStore<State>();
     const className = computed(() => (getters.sidebar ? 'main show' : 'main'));
     return { className };
   },
