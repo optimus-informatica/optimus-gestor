@@ -1,5 +1,5 @@
 import { createStore } from 'vuex';
-import { State } from '@/types';
+import { State, User } from '@/types';
 import { state } from '@/defaults';
 
 const store = createStore<State>({
@@ -9,10 +9,14 @@ const store = createStore<State>({
     toggleSidebar: state => {
       state.sidebar = !state.sidebar;
     },
+    setUser: (state, data: User) => {
+      state.user = data;
+    },
   },
 
   getters: {
     sidebar: state => state.sidebar,
+    user: state => state.user,
   },
 });
 

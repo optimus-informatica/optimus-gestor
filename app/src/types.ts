@@ -1,8 +1,5 @@
-import { AxiosStatic } from 'axios';
-
 export interface State {
   sidebar: boolean;
-  axios: AxiosStatic;
   user: User;
 }
 
@@ -31,4 +28,12 @@ export interface Role {
   id: number;
   name: string;
   rules: Rules;
+}
+
+export interface LoginResponse {
+  message: string;
+  errors: {
+    username?: string[];
+    password?: string[];
+  };
 }

@@ -4,6 +4,7 @@
 $primary: #263238;
 $light: #4f5b62;
 $dark: #000a12;
+$primary-color: #90a4ae;
 $time: 0.3s;
 
 $font-size: 1rem;
@@ -37,3 +38,22 @@ $submenu-dark: #babdbe;
 $submenu-light: #fff;
 $submenu-color: $dark;
 $submenu-size: 13rem;
+
+//
+// FORMS
+//
+$form-radius: 0.3rem;
+
+$input-bg: #eceff1;
+$input-color: #263238;
+$input-border: #babdbe;
+$input-size: 2.5rem;
+$input-padding: 0 0.5rem;
+
+$button-padding: 0 1rem;
+$button-bg: #263238;
+$button-color: #90a4ae;
+$button-border: #000a12;
+$button-bg-hover: $button-color;
+$button-color-hover: $button-bg;
+$button-border-hover: #62757f;

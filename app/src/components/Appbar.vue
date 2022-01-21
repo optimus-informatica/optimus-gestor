@@ -1,7 +1,7 @@
 <template>
   <div :class="className">
     <div class="title">Home</div>
-    <ul class="user">
+    <ul class="user" v-if="logged">
       <li class="item">
         <router-link to="/profile" title="Configurações da conta">
           <i class="material-icons">account_circle</i>
@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { State } from '@/types';
+import { State, User } from '@/types';
 import { computed, defineComponent } from 'vue';
 import { useStore } from 'vuex';
 
@@ -34,8 +34,9 @@ export default defineComponent({
     const className = computed<string>(() =>
       getters.sidebar ? 'appbar show' : 'appbar',
     );
+    const logged = computed<boolean>(() => getters.user.id > 0);
 
-    return { className };
+    return { className, logged };
   },
 });
 </script>

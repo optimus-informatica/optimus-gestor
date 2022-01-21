@@ -1,7 +1,16 @@
 import { User, Rules, State } from '@/types';
-import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:8000';
-axios.defaults.withCredentials = true;
+import axios, { AxiosInstance } from 'axios';
+
+export const http = (): AxiosInstance =>
+  axios.create({
+    baseURL: 'http://localhost:8000',
+    withCredentials: true,
+    timeout: 1000,
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  });
 
 export const user = (): User => ({
   id: 0,
@@ -26,5 +35,4 @@ export const rules = (): Rules => ({
 export const state = (): State => ({
   sidebar: false,
   user: user(),
-  axios,
 });

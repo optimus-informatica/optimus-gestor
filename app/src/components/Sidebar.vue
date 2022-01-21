@@ -1,5 +1,5 @@
 <template>
-  <nav :class="className">
+  <nav v-if="logged" :class="className">
     <ul class="menu">
       <li class="arrow">
         <button type="button" @click="toggleSidebar">
@@ -86,7 +86,9 @@ export default defineComponent({
       getters.sidebar ? 'arrow_back_ios' : 'menu',
     );
 
-    return { toggleSidebar, className, icon };
+    const logged = computed(() => getters.user.id > 0);
+
+    return { toggleSidebar, className, icon, logged };
   },
 });
 </script>

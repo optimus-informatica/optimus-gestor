@@ -14,7 +14,7 @@ const typescript = {
 };
 
 const babel = {
-  test: /\.(js|ts)x?$/,
+  test: /\.(js)x?$/,
   loader: 'babel-loader',
   exclude: /node_modules/,
 };
@@ -30,7 +30,7 @@ const sass = {
 };
 
 const files = {
-  test: /\.(png|jpe?g|gif|svg)$/i,
+  test: /\.(png|jpe?g|gif)$/i,
   loader: 'file-loader',
   options: {
     outputPath: 'assets',
@@ -80,5 +80,6 @@ module.exports = {
     open: true,
     historyApiFallback: true,
   },
+  devtool: 'source-map',
   plugins,
 };

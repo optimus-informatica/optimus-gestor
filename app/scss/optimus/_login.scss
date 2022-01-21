@@ -1,0 +1,11 @@
+.login {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  .form-login {
+    min-width: 300px;
+    padding: $padding;
+    background: whitesmoke;
+  }
+}
