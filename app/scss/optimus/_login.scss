@@ -2,10 +2,21 @@
   justify-content: center;
   align-items: center;
   display: flex;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.3)
+  );
+  min-height: calc(100vh - ($appbar-size + 2rem));
+  padding: $padding;
+  border-radius: $radius;
 
   .form-login {
-    min-width: 300px;
+    width: 90vw;
+    max-width: 450px;
     padding: $padding;
     background: whitesmoke;
+    border-radius: 0.3rem;
+    box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.2);
   }
 }

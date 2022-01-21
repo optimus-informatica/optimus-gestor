@@ -67,16 +67,16 @@ const isLoggedIn = async (to: RouteLocationNormalized): Promise<LoggedIn> => {
  *
  * Middleware para verificar se o usuário está autenticado
  * @param to RouteLocationNormalized
- * @param from RouteLocationNormalized
+ * @param _from RouteLocationNormalized
  * @param next NavigationGuardNext
  */
 const middlewareGuard = async (
   to: RouteLocationNormalized,
-  from: RouteLocationNormalized,
+  _from: RouteLocationNormalized,
   next: NavigationGuardNext,
 ) => {
+  if (to.name === 'login') return next();
   const { name, logged } = await isLoggedIn(to);
-  if (logged && name === 'login') return next({ name: 'home' });
   if (!logged) return next({ name });
   next();
 };

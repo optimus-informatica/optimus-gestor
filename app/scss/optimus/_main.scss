@@ -1,12 +1,11 @@
 .main {
-  padding: 1rem 1rem 1rem calc($sidebar-icon-size + 1rem);
-  transition: padding $time ease-in-out;
+  padding: 1rem;
 
   .home,
-  .login,
   .profile,
   .user-create,
   .users {
+    transition: margin $time ease-in-out;
     background: linear-gradient(
       to right,
       rgba(255, 255, 255, 0.6),
@@ -15,9 +14,15 @@
     min-height: calc(100vh - ($appbar-size + 2rem));
     padding: $padding;
     border-radius: $radius;
+    margin-left: calc($sidebar-icon-size);
   }
 
   &.show {
-    padding-left: calc($sidebar-size + 1rem);
+    .home,
+    .profile,
+    .user-create,
+    .users {
+      margin-left: calc($sidebar-size);
+    }
   }
 }
