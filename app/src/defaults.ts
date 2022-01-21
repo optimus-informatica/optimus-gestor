@@ -34,5 +34,6 @@ export const rules = (): Rules => ({
 
 export const state = (): State => ({
   sidebar: false,
+  title: 'Home',
   user: user(),
 });

@@ -1,6 +1,6 @@
 <template>
   <div :class="className">
-    <div class="title">Home</div>
+    <div class="title">{{ title }}</div>
     <ul class="user" v-if="logged">
       <li class="item">
         <router-link to="/profile" title="Configurações da conta">
@@ -35,8 +35,9 @@ export default defineComponent({
       getters.sidebar ? 'appbar show' : 'appbar',
     );
     const logged = computed<boolean>(() => getters.user.id > 0);
+    const title = computed<string>(() => getters.title);
 
-    return { className, logged };
+    return { className, logged, title };
   },
 });
 </script>

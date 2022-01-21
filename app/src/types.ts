@@ -1,5 +1,6 @@
 export interface State {
   sidebar: boolean;
+  title: string;
   user: User;
 }
 

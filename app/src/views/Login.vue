@@ -7,9 +7,10 @@
 </template>
 <script lang="ts">
 import FormLogin from '@/components/FormLogin.vue';
-import { User } from '@/types';
-import { defineComponent } from 'vue';
+import { State, User } from '@/types';
+import { defineComponent, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'Login',
@@ -18,9 +19,11 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter();
+    const { commit } = useStore<State>();
     const loginSuccess = (_payload: User) => {
       router.push({ name: 'home' });
     };
+    onMounted(() => commit('setTitle', 'Login'));
     return { loginSuccess };
   },
 });

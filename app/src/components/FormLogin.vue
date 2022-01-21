@@ -1,6 +1,5 @@
 <template>
   <form @submit.prevent="login" method="post">
-    <div class="header">Painel de login</div>
     <div class="input">
       <label for="username">Usuário:</label>
       <input
@@ -55,7 +54,7 @@ export default defineComponent({
     const res = ref<LoginResponse>({ message: ' ', errors: {} });
 
     // Methods
-    const login = async (e: Event) => {
+    const login = async (_e: Event) => {
       res.value = { message: 'Aguarde...', errors: {} };
       if (!http) return;
       try {
