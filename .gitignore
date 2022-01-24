@@ -1,3 +1,4 @@
 node_modules
 app/public
 optimus-php
+.env

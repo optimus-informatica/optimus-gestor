@@ -3,6 +3,8 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 // const miniCssExtractPlugin = require('mini-css-extract-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
+const dotenv = require('dotenv');
+dotenv.config({});
 
 const typescript = {
   test: /\.tsx?$/,
@@ -54,6 +56,9 @@ const plugins = [
   new webpack.DefinePlugin({
     __VUE_OPTIONS_API__: true,
     __VUE_PROD_DEVTOOLS__: true,
+    process: {
+      env: JSON.stringify(process.env),
+    },
   }),
   // new miniCssExtractPlugin({
   //   filename: 'css/app.css',

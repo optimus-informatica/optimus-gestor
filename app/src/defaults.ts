@@ -10,7 +10,7 @@ import axios, { AxiosInstance } from 'axios';
 
 export const http = (): AxiosInstance =>
   axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: process.env.API_URL,
     withCredentials: true,
     timeout: 1000,
     headers: {
