@@ -8,16 +8,24 @@ import {
 } from '@/types';
 import axios, { AxiosInstance } from 'axios';
 
-export const http = (): AxiosInstance =>
-  axios.create({
+export const http = (): AxiosInstance => {
+  const token = localStorage.getItem('_optimus_gestor_token');
+  const contentType = {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  };
+
+  const headers = token
+    ? { ...contentType, Authorization: `Bearer ${token}` }
+    : { ...contentType };
+
+  return axios.create({
     baseURL: process.env.API_URL,
     withCredentials: true,
     timeout: 1000,
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
+    headers,
   });
+};
 
 export const user = (): User => ({
   id: 0,
@@ -41,6 +49,7 @@ export const rules = (): Rules => ({
 
 export const state = (): State => ({
   sidebar: false,
+  token: localStorage.getItem('_optimus_gestor_token'),
   title: 'Home',
   user: user(),
 });

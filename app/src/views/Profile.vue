@@ -73,13 +73,12 @@
 <script lang="ts">
 import FormField from '@/components/FormField.vue';
 import FormSelect from '@/components/FormSelect.vue';
-import { profileRequest, profileResponse, translates } from '@/defaults';
+import { profileRequest, profileResponse, translates, http } from '@/defaults';
 import { ProfileResponse, Role, State, User } from '@/types';
-import { AxiosInstance, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import {
   computed,
   defineComponent,
-  inject,
   onBeforeMount,
   onMounted,
   reactive,
@@ -91,7 +90,7 @@ export default defineComponent({
   components: { FormField, FormSelect },
   name: 'Profile',
   setup() {
-    const http = inject<AxiosInstance>('axios');
+    const api = http();
     const { commit, getters } = useStore<State>();
 
     const data = reactive({
@@ -102,10 +101,9 @@ export default defineComponent({
     });
 
     onBeforeMount(async () => {
-      if (!http) return;
       try {
         const uri = `/api/role`;
-        const response = await http.get<Role[]>(uri);
+        const response = await api.get<Role[]>(uri);
         data.roles = response.data;
       } catch (e: any) {}
     });
@@ -128,10 +126,8 @@ export default defineComponent({
     //
     const save = async (_e: Event) => {
       const uri = `/api/user/${getters.user.id}`;
-      console.log(http);
-      if (!http) return;
       try {
-        const response = await http.put<User>(uri, data.data);
+        const response = await api.put<User>(uri, data.data);
         commit('setUser', response.data);
         commit('setTitle', `Perfil de ${response.data.name}`);
       } catch (e: any) {

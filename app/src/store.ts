@@ -12,6 +12,10 @@ const store = createStore<State>({
     setUser: (state, data: User) => {
       state.user = data;
     },
+    setToken: (state, data: string) => {
+      state.token = data;
+      localStorage.setItem('_optimus_gestor_token', data);
+    },
     setTitle: (state, data: string) => (state.title = data),
   },
 

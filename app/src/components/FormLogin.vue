@@ -8,8 +8,8 @@
         name="username"
         id="username"
       />
-      <div v-if="res.errors.username" class="errors">
-        {{ res.errors.username[0] }}
+      <div v-if="response.errors.username" class="errors">
+        {{ response.errors.username[0] }}
       </div>
     </div>
     <div class="input">
@@ -21,20 +21,26 @@
         id="password"
       />
       <div v-if="res.errors.password" class="errors">
-        {{ res.errors.password[0] }}
+        {{ response.errors.password[0] }}
       </div>
     </div>
     <div class="footer">
-      <div v-if="res.message" class="errors">{{ res.message }}</div>
+      <div v-if="response.message" class="errors">{{ response.message }}</div>
       <button type="submit">Entrar</button>
     </div>
   </form>
 </template>
 <script lang="ts">
 import { LoginResponse, User, State } from '@/types';
-import { AxiosInstance, AxiosResponse } from 'axios';
-import { defineComponent, inject, ref } from 'vue';
+import { AxiosResponse } from 'axios';
+import { defineComponent, inject, reactive, toRefs } from 'vue';
+import { http } from '@/defaults';
 import { useStore } from 'vuex';
+
+interface Response {
+  user: User;
+  token: string;
+}
 
 export default defineComponent({
   props: {
@@ -45,34 +51,34 @@ export default defineComponent({
   },
 
   setup(props, _context) {
-    const http = inject<AxiosInstance>('axios');
+    const api = http();
     const { commit } = useStore<State>();
-    const device = navigator.userAgent;
 
     // Reactives
-    const data = ref({ username: '', password: '', device });
-    const res = ref<LoginResponse>({ message: ' ', errors: {} });
+    const r = reactive({
+      data: { username: '', passwrod: '', device: navigator.userAgent },
+      response: { message: ' ', errors: {} },
+    });
 
     // Methods
     const login = async (_e: Event) => {
-      res.value = { message: 'Aguarde...', errors: {} };
-      if (!http) return;
+      r.response = { message: 'Aguarde...', errors: {} };
       try {
-        await http.get('/sanctum/csrf-cookie');
-        const response = await http.post<User>('/api/login', data.value);
-        commit('setUser', response.data);
+        const response = await api.post<Response>('api/authenticate', r.data);
+        commit('setUser', response.data.user);
+        commit('setToken', response.data.token);
         props.loginSuccess(response.data);
       } catch (e: any) {
         if (typeof e === 'object') {
           if (e.response) {
             const response = e.response as AxiosResponse<LoginResponse>;
-            res.value = response.data;
+            r.response = response.data;
           } else console.error(e);
         }
       }
     };
 
-    return { data, res, login };
+    return { ...toRefs(r), login };
   },
 });
 </script>

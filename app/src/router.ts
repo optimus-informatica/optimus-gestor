@@ -61,11 +61,13 @@ const isLoggedIn = async (to: RouteLocationNormalized): Promise<LoggedIn> => {
     if (typeof e.response !== 'object') data.name = 'error-network';
     else {
       const response = e.response as AxiosResponse<{ message: string }>;
-      if (response.status === 401) data.name = 'login';
-      else if (response.status === 404) data.name = 'Error404';
+      if (response.status === 401) {
+        data.name = 'login';
+        localStorage.removeItem('_optimus_gestor_token');
+      } else if (response.status === 404) data.name = 'Error404';
       else data.name = 'Error500';
     }
-  }
+  } //_optimus_gestor_token
   return data;
 };
 
