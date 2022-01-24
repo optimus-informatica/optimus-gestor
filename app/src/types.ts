@@ -28,6 +28,16 @@ export interface Rules {
 export interface Role {
   id: number;
   name: string;
+  nivel: number;
+  rules: Rules;
+}
+
+export interface ProfileRequest {
+  name: string;
+  username: string;
+  email: string;
+  role_id: number;
+  nivel: number;
   rules: Rules;
 }
 
@@ -36,5 +46,17 @@ export interface LoginResponse {
   errors: {
     username?: string[];
     password?: string[];
+  };
+}
+
+export interface ProfileResponse {
+  message: string;
+  errors: {
+    name?: string[];
+    username?: string[];
+    email?: string[];
+    role_id?: string[];
+    nivel?: string[];
+    rules?: string[];
   };
 }

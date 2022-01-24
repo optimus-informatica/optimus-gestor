@@ -9,6 +9,7 @@ import { AxiosResponse } from 'axios';
 
 import Home from '@/views/Home.vue';
 import Login from '@/views/Login.vue';
+import Profile from '@/views/Profile.vue';
 
 import { http } from '@/defaults';
 import { User } from '@/types';
@@ -24,6 +25,11 @@ const routes: RouteRecordRaw[] = [
     name: 'login',
     path: '/login',
     component: Login,
+  },
+  {
+    name: 'profile',
+    path: '/profile',
+    component: Profile,
   },
 ];
 

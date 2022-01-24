@@ -1,4 +1,11 @@
-import { User, Rules, State } from '@/types';
+import {
+  User,
+  Rules,
+  State,
+  Role,
+  ProfileRequest,
+  ProfileResponse,
+} from '@/types';
 import axios, { AxiosInstance } from 'axios';
 
 export const http = (): AxiosInstance =>
@@ -36,4 +43,37 @@ export const state = (): State => ({
   sidebar: false,
   title: 'Home',
   user: user(),
+});
+
+export const role = (): Role => ({
+  id: 0,
+  name: '',
+  nivel: 100,
+  rules: rules(),
+});
+
+export const profileRequest = (user: User): ProfileRequest => ({
+  name: user.name,
+  username: user.username,
+  email: user.email,
+  role_id: user.role_id,
+  nivel: user.nivel,
+  rules: user.rules,
+});
+
+export const profileResponse = (): ProfileResponse => ({
+  message: ' ',
+  errors: {},
+});
+
+export const translates = () => ({
+  user: 'Usuário',
+  client: 'Cliente',
+  product: 'Produto',
+  service: 'Serviço',
+  order: 'Ordem de Serviço',
+  create: 'Registrar',
+  delete: 'Remover',
+  update: 'Editar',
+  read: 'Vizualizar',
 });

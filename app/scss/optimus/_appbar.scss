@@ -6,6 +6,8 @@
   height: $appbar-size;
   color: $appbar-color;
   transition: margin $time ease-in-out;
+  position: fixed;
+  width: 100%;
   .title {
     font-size: calc($font-size + 0.5rem);
     margin: auto;

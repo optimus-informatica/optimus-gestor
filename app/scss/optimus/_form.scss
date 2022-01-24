@@ -52,4 +52,55 @@ form {
       border: 0.1rem solid $button-border-hover;
     }
   }
+
+  .form-field {
+    display: flex;
+    gap: 0.2rem;
+    flex-direction: column;
+    margin: 1rem 0;
+
+    label {
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+
+      .material-icons {
+        font-size: 1rem;
+        text-transform: lowercase;
+      }
+    }
+
+    input[type='text'],
+    input[type='password'],
+    select {
+      border: 0.1rem solid $input-border;
+      height: 2.5rem;
+      border-radius: $form-radius;
+      padding: 0 $padding;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    select,
+    option {
+      text-transform: uppercase;
+    }
+
+    .data {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 3rem;
+      gap: 1rem;
+
+      div {
+        width: 100%;
+      }
+
+      span {
+        font-size: 1.2rem;
+        text-transform: uppercase;
+      }
+    }
+  }
 }

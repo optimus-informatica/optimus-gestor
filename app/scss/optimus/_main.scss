@@ -8,13 +8,14 @@
     transition: margin $time ease-in-out;
     background: linear-gradient(
       to right,
-      rgba(255, 255, 255, 0.6),
-      rgba(255, 255, 255, 0.3)
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.4)
     );
     min-height: calc(100vh - ($appbar-size + 2rem));
-    padding: $padding;
+    padding: 1rem;
     border-radius: $radius;
     margin-left: calc($sidebar-icon-size);
+    margin-top: $appbar-size;
   }
 
   &.show {
