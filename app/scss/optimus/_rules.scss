@@ -1,0 +1,21 @@
+.rules {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  .rule {
+    display: flex;
+    flex-direction: column;
+    .name {
+      font-size: 1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .boxs {
+      .box {
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+      }
+    }
+  }
+}

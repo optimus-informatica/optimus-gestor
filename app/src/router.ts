@@ -10,6 +10,7 @@ import { AxiosResponse } from 'axios';
 import Home from '@/views/Home.vue';
 import Login from '@/views/Login.vue';
 import Profile from '@/views/Profile.vue';
+import UserCreate from '@/views/UserCreate.vue';
 
 import { http } from '@/defaults';
 import { User } from '@/types';
@@ -30,6 +31,11 @@ const routes: RouteRecordRaw[] = [
     name: 'profile',
     path: '/profile',
     component: Profile,
+  },
+  {
+    name: 'user_create',
+    path: '/user-create',
+    component: UserCreate,
   },
 ];
 

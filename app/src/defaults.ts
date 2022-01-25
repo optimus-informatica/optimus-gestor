@@ -33,7 +33,7 @@ export const user = (): User => ({
   username: '',
   email: '',
   role_id: 0,
-  nivel: 100,
+  nivel: 0,
   rules: rules(),
   created_at: '',
   updated_at: '',
@@ -57,7 +57,7 @@ export const state = (): State => ({
 export const role = (): Role => ({
   id: 0,
   name: '',
-  nivel: 100,
+  nivel: 0,
   rules: rules(),
 });
 

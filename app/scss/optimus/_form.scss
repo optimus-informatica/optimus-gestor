@@ -14,7 +14,10 @@ form {
     }
 
     input[type='text'],
-    input[type='password'] {
+    input[type='password'],
+    input[type='number'],
+    input[type='email'],
+    select {
       border: 0.1rem solid $input-border;
       height: 2.5rem;
       border-radius: $form-radius;
