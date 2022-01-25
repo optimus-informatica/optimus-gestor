@@ -158,7 +158,7 @@ interface ErrorResponse {
 export default defineComponent({
   setup() {
     const api = http();
-    const { state } = useStore<State>();
+    const { state, commit } = useStore<State>();
     const user = state.user;
     const permissions = ['create', 'delete', 'update', 'read'];
 
@@ -185,6 +185,9 @@ export default defineComponent({
         const res = await api.get<Role[]>('api/role');
         data.roles = res.data;
       } catch (_e: any) {}
+
+      // Seta o titulo na appbar
+      commit('setTitle', 'Registro de usuário');
     });
 
     //
