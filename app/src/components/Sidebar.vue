@@ -17,7 +17,7 @@
         </button>
         <ul class="submenu">
           <li class="subitem">
-            <router-link to="#users">Novo usuário</router-link>
+            <router-link to="/user-create">Novo usuário</router-link>
           </li>
           <li class="subitem">
             <router-link to="/users">Usuários registrados</router-link>

@@ -20,7 +20,7 @@
         name="password"
         id="password"
       />
-      <div v-if="res.errors.password" class="errors">
+      <div v-if="response.errors.password" class="errors">
         {{ response.errors.password[0] }}
       </div>
     </div>
