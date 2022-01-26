@@ -11,6 +11,7 @@ import Home from '@/views/Home.vue';
 import Login from '@/views/Login.vue';
 import Profile from '@/views/Profile.vue';
 import UserCreate from '@/views/UserCreate.vue';
+import Users from '@/views/Users.vue';
 
 import { http } from '@/defaults';
 import { User } from '@/types';
@@ -36,6 +37,11 @@ const routes: RouteRecordRaw[] = [
     name: 'user_create',
     path: '/user-create',
     component: UserCreate,
+  },
+  {
+    name: 'users',
+    path: '/users',
+    component: Users,
   },
 ];
 

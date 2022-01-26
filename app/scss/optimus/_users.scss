@@ -1,0 +1,50 @@
+.users {
+  .table-users {
+    overflow: auto;
+    width: 100%;
+    padding: 0.5rem;
+    .header,
+    .content .line {
+      display: grid;
+      grid-template-columns: 2rem 15rem 10rem 1fr 9rem 3rem 5rem;
+      min-width: 900px;
+      padding: 0.2rem 0.2rem;
+      border-bottom: 1px solid #999;
+      align-items: center;
+    }
+    .header {
+      background: $primary;
+      color: whitesmoke;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    .content {
+      min-width: 800px;
+      font-size: 0.9rem;
+      .line {
+        &:hover {
+          background: $primary-color;
+        }
+        .role {
+          text-transform: uppercase;
+        }
+        .col {
+          button {
+            background: none;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+            color: $dark;
+            margin: 0 0.1rem;
+            &:hover {
+              color: $light;
+            }
+            .material-icons {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
