@@ -1,6 +1,5 @@
 <template>
   <div :class="className">
-    Carregando
     <span></span>
     <span></span>
     <span></span>

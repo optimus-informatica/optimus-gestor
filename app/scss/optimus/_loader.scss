@@ -3,7 +3,7 @@
   height: 100%;
   display: flex;
   position: absolute;
-  background: rgba(255, 255, 255, 0);
+  background: none;
   top: 0;
   left: 0;
   justify-content: center;
@@ -12,6 +12,8 @@
   font-weight: bold;
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 9;
 
   &.show {
     opacity: 1;
@@ -19,20 +21,20 @@
   }
 
   span {
-    width: 15px;
-    height: 15px;
-    background: $primary;
+    width: 20px;
+    height: 20px;
+    background: teal;
     border-radius: 50%;
     margin: 0 5px;
     animation: bounce 600ms infinite alternate;
     transform: translate(0, 0) scale(1);
     box-shadow: 3px 2px 2px rgba($color: #000000, $alpha: 0.3);
     &:nth-child(2) {
-      background: $light;
+      background: teal;
       animation-delay: 200ms;
     }
     &:nth-child(3) {
-      background: $primary;
+      background: teal;
       animation-delay: 400ms;
     }
   }
@@ -41,5 +43,6 @@
 @keyframes bounce {
   to {
     transform: translate(0, 0) scale(0.5);
+    background: rgb(0, 168, 168);
   }
 }

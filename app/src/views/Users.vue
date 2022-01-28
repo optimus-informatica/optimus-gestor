@@ -1,5 +1,6 @@
 <template>
   <div class="users">
+    <loader :visible="loader" />
     <div class="table-users">
       <div class="header">
         <div class="col">#</div>
@@ -16,124 +17,144 @@
           <div class="col">{{ user.name }}</div>
           <div class="col">{{ user.username }}</div>
           <div class="col">{{ user.email }}</div>
-          <div class="col role" v-if="roles[user.role_id]">
-            {{ roles[user.role_id].name }}
-          </div>
+          <div class="col role">{{ user.role.name }}</div>
           <div class="col">{{ user.nivel }}</div>
           <div class="col">
-            <button type="button" @click="editHandle(i)">
+            <button
+              type="button"
+              @click="handle.edit(i)"
+              :disabled="disabled(i)"
+            >
               <span class="material-icons">edit</span>
             </button>
-            <button type="button" @click="changeHandle">
+            <button
+              type="button"
+              @click="handle.password(i)"
+              :disabled="disabled(i)"
+            >
               <span class="material-icons">lock</span>
             </button>
-            <button type="button" @click="deleteHandle">
+            <button
+              type="button"
+              @click="handle.delete(i)"
+              :disabled="disabled(i)"
+            >
               <span class="material-icons">delete</span>
             </button>
           </div>
         </div>
       </div>
     </div>
-    <modal
-      title="Editar usuário"
-      :visible="visible"
-      @hide="hide"
-      :ok="saveEditHandle"
-      okText="Salvar"
-      okIcon="save"
-    >
-      <div class="form-edit-user">
-        <form action="" method="post">
-          <div class="input">
-            <label for="name">Nome:</label>
-            <input type="text" name="name" id="name" v-model="user.name" />
-            <span class="errors"></span>
-          </div>
-          <div class="input">
-            <label for="username">Usuário:</label>
-            <input
-              type="text"
-              name="username"
-              id="username"
-              v-model="user.username"
-            />
-            <span class="errors"></span>
-          </div>
-          <div class="input">
-            <label for="email">E-mail:</label>
-            <input type="email" name="email" id="email" v-model="user.email" />
-            <span class="errors"></span>
-          </div>
-          <div class="input">
-            <label for="role_id">Função:</label>
-            <select name="role_id" id="role_id" v-model="user.role_id">
-              <option v-for="role in roles" :key="role.id" :value="role.id">
-                {{ role.name.toUpperCase() }}
-              </option>
-            </select>
-            <span class="errors"></span>
-          </div>
-        </form>
-      </div>
-    </modal>
-    {{ visible }}
+    <modal-edit-user
+      :visible="edit"
+      :data="user"
+      @toggle="toggle.edit"
+      @success="success.edit"
+    />
+    <modal-change-password
+      :visible="password"
+      :data="user"
+      @toggle="toggle.password"
+      @success="success.password"
+    />
   </div>
 </template>
 <script lang="ts">
+import Loader from '@/components/Loader.vue';
 import Modal from '@/components/Modal.vue';
-import { http, user } from '@/defaults';
-import { Role, State, User } from '@/types';
-import { defineComponent, onBeforeMount, reactive, toRefs } from 'vue';
+import ModalChangePassword from '@/components/ModalChangePassword.vue';
+import ModalEditUser from '@/components/ModalEditUser.vue';
+import { http, translates, user } from '@/defaults';
+import { State, User } from '@/types';
+import {
+  computed,
+  defineComponent,
+  onBeforeMount,
+  onMounted,
+  reactive,
+  toRefs,
+} from 'vue';
 import { useStore } from 'vuex';
 
 export default defineComponent({
-  components: { Modal },
+  components: { Modal, Loader, ModalEditUser, ModalChangePassword },
   setup() {
     const api = http();
-    const { commit } = useStore<State>();
+    const { commit, state } = useStore<State>();
+    const auth = computed(() => state.user);
+
     onBeforeMount(async () => {
-      const resUsers = await api.get<User[]>('/api/user');
-      data.users = resUsers.data;
-
-      const resRoles = await api.get<Role[]>('api/role');
-      const roles = resRoles.data;
-      for (let i = 0; i < roles.length; i++) {
-        Object.assign(data.roles, { [roles[i].id]: roles[i] });
-      }
-
+      const res = await api.get<User[]>('/api/user');
+      data.users = res.data;
       commit('setTitle', 'Usuários');
+    });
+
+    onMounted(() => {
+      data.loader = false;
     });
 
     const data = reactive({
       users: [] as User[],
       roles: {},
-      visible: false,
       user: user(),
+      edit: false,
+      password: false,
+      delete: false,
+      loader: true,
     });
 
-    const hide = (payload: boolean) => {
-      console.log('HIDE: ', payload);
-      data.visible = payload;
+    const toggle = {
+      edit(payload: boolean) {
+        data.edit = payload;
+      },
+      password(payload: boolean) {
+        data.password = payload;
+      },
+      delete(payload: boolean) {
+        data.delete = payload;
+      },
     };
 
-    const editHandle = (i: number) => {
-      data.visible = !data.visible;
-      data.user = data.users[i];
+    const handle = {
+      edit(i: number) {
+        data.edit = true;
+        data.user = data.users[i];
+      },
+      password(i: number) {
+        data.password = true;
+        data.user = data.users[i];
+      },
+      delete(i: number) {
+        data.delete = true;
+        data.user = data.users[i];
+      },
     };
 
-    const saveEditHandle = () => {
-      console.log('SAVE EDIT: ', data.user.id);
+    const success = {
+      edit(payload: User) {
+        data.user = payload;
+      },
+      password(payload: User) {
+        data.user = payload;
+      },
+      delete(payload: User) {
+        data.user = payload;
+      },
     };
-    const deleteHandle = () => {};
-    const changeHandle = () => {};
+
+    const disabled = (i: number) => {
+      if (data.users[i].role_id === 1 && data.users[i].id !== auth.value.id)
+        return true;
+      return auth.value.nivel < data.users[i].nivel;
+    };
 
     return {
       ...toRefs(data),
-      hide,
-      editHandle,
-      saveEditHandle,
-      deleteHandle,
-      changeHandle,
+      toggle,
+      handle,
+      success,
+      translate: translates(),
+      disabled,
     };
   },
 });

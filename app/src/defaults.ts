@@ -86,3 +86,6 @@ export const translates = () => ({
   update: 'Editar',
   read: 'Vizualizar',
 });
+
+export const sessions = () => ['user', 'client', 'product', 'service', 'order'];
+export const permissions = () => ['create', 'delete', 'update', 'read'];

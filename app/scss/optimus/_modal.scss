@@ -12,7 +12,7 @@
   padding: 0.5rem;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  z-index: 10;
+  z-index: 9;
   max-height: 95vh;
 
   &.show {
@@ -28,6 +28,7 @@
       font-weight: bold;
       font-size: 1.2rem;
       margin: 0 auto;
+      text-align: center;
     }
 
     .material-icons {
@@ -37,6 +38,7 @@
       font-size: 1.2rem;
       height: 2rem;
       width: 2rem;
+      padding: 0;
       &:hover {
         background: whitesmoke;
       }

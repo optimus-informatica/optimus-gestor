@@ -1,5 +1,5 @@
 <template>
-  <div :class="className">
+  <form @submit.prevent="submit" :class="className">
     <div class="header">
       <span class="title">{{ title }}</span>
       <button
@@ -18,12 +18,12 @@
         <span class="material-icons">close</span>
         <span class="text">Fechar</span>
       </button>
-      <button type="button" @click="ok">
-        <span class="material-icons">{{ okIcon }}</span>
-        <span class="text">{{ okText }}</span>
+      <button type="submit">
+        <span class="material-icons">{{ submitIcon }}</span>
+        <span class="text">{{ submitText }}</span>
       </button>
     </div>
-  </div>
+  </form>
 </template>
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
@@ -33,22 +33,27 @@ export default defineComponent({
   props: {
     visible: Boolean,
     title: String,
-    ok: Function,
-    okText: String,
-    okIcon: String,
+    submit: Function,
+    submitText: String,
+    submitIcon: String,
   },
   emits: ['hide'],
   setup(props, ctx) {
-    const default_ok = () => {
+    const default_submit = () => {
       ctx.emit('hide', false);
     };
+
     const className = computed(() => (props.visible ? 'modal show' : 'modal'));
-    const okIcon = computed(() => (props.okIcon ? props.okIcon : 'check'));
-    const okText = computed(() => (props.okText ? props.okText : 'Ok'));
-    const ok = computed(() =>
-      typeof props.ok === 'function' ? props.ok : default_ok,
+    const submitIcon = computed(() =>
+      props.submitIcon ? props.submitIcon : 'send',
     );
-    return { className, okText, okIcon, ok };
+    const submitText = computed(() =>
+      props.submitText ? props.submitText : 'Enviar',
+    );
+    const submit = computed(() =>
+      typeof props.submit === 'function' ? props.submit : default_submit,
+    );
+    return { className, submitText, submitIcon, submit };
   },
 });
 </script>

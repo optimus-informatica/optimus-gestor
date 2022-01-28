@@ -6,7 +6,7 @@
     .header,
     .content .line {
       display: grid;
-      grid-template-columns: 2rem 15rem 10rem 1fr 9rem 3rem 5rem;
+      grid-template-columns: 50px 200px 150px 1fr 120px 50px 70px;
       min-width: 900px;
       padding: 0.2rem 0.2rem;
       border-bottom: 1px solid #999;
@@ -19,6 +19,7 @@
       font-size: 1rem;
     }
     .content {
+      position: relative;
       min-width: 800px;
       font-size: 0.9rem;
       .line {
@@ -27,8 +28,11 @@
         }
         .role {
           text-transform: uppercase;
+          font-size: 0.8rem;
+          font-style: italic;
         }
         .col {
+          display: flex;
           button {
             background: none;
             padding: 0;
@@ -36,6 +40,9 @@
             cursor: pointer;
             color: $dark;
             margin: 0 0.1rem;
+            &:disabled {
+              color: $light;
+            }
             &:hover {
               color: $light;
             }
